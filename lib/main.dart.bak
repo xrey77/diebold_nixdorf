@@ -1,0 +1,140 @@
+// import 'package:diebold_nixdorf/login.dart';
+import 'package:flutter/material.dart';
+// import 'package:flutter/src/material/drawer.dart';
+import 'login.dart';
+
+//BOTTOM NAVIGATION
+int _selectedIndex = 0;
+const TextStyle optionStyle =
+    TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+
+void main() {
+  runApp(const BaseLayout());
+}
+
+class BaseLayout extends StatelessWidget {
+  const BaseLayout({Key? key}) : super(key: key);
+  static const appTitle = 'Diebold-Nixdorf';
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: appTitle,
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text("Diebold-Nixdorf"),
+          ),
+          drawer: Drawer(
+            //DRAWER MENU=====
+            child: ListView(
+              // Important: Remove any padding from the ListView.
+              padding: EdgeInsets.zero,
+              children: [
+                const DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    image: DecorationImage(
+                        image: AssetImage("assets/images/admin.jpeg"),
+                        fit: BoxFit.cover),
+                  ),
+                  child: Text(''),
+                ),
+                ListTile(
+                  title: const Text('About Us'),
+                  onTap: () {
+                    // Update the state of the app.
+                    // ...
+                  },
+                ),
+                ListTile(
+                  title: const Text('Services'),
+                  onTap: () {
+                    // Update the state of the app.
+                  },
+                ),
+              ],
+            ),
+          ),
+          body: Container(
+              constraints: const BoxConstraints.expand(),
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/images/background.jpeg"),
+                      fit: BoxFit.cover)),
+              child: const TextField(
+                decoration:
+                    InputDecoration(fillColor: Colors.amber, filled: true),
+              )),
+              
+          bottomNavigationBar: BottomNavigationBar(
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.business),
+                  label: 'Business',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.school),
+                  label: 'School',
+                ),
+              ],
+              currentIndex: _selectedIndex,
+              selectedItemColor: Colors.amber[800],
+              onTap: (_selectedIndex) {
+                if (_selectedIndex == 0) {
+                  Navigator.pop(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomePage()),
+                  );
+                  return;
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => const HomePage()),
+                  // );
+                }
+              } //_onItemTapped,
+              ),
+        ));
+  }
+}
+
+class SideMenu extends StatelessWidget {
+  const SideMenu({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(""),
+            ),
+            ListTile(
+              title: const Text('Item 1'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: const Text('Item 2'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
